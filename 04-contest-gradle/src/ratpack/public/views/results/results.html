@@ -1,0 +1,52 @@
+<div class="row">
+  <form class="form-inline" role="form" name="filterForm">
+    <div class="form-group">
+      <label for="filter">Filter:</label>
+      <input type="text" id="filter" ng-model="resultCtrl.filter" required class="form-control"/>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Last</h2>
+    <table class="table table-striped table-bordered table-hover">
+      <tr ng-repeat="result in filteredLastResults = (resultCtrl.lastResults | filter:resultCtrl.filter)">
+        <td>
+          <p><strong>{{result.userName}}</strong></p>
+          <p>Done in <strong>{{result.duration}}ms</strong></p>
+          <p>Started at <em>{{result.startTime | timestamp}}</em></p>
+          <div ng-show="result.exception || result.validation" style="color: #770000">
+            <p ng-show="result.exception"><strong>Exception: {{result.exception}}</strong></p>
+            <p ng-show="result.validation"><strong>Validation: {{result.validation}}</strong></p>
+          </div>
+          <p ng-show="result.response">
+            Response: {{result.response}}
+          </p>
+      </tr>
+      <tr ng-hide="filteredLastResults.length">
+        <td>No results</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <h2>Top</h2>
+    <table class="table table-striped table-bordered table-hover">
+      <tr ng-repeat="result in filteredTopResults = (resultCtrl.topResults | filter:resultCtrl.filter)">
+        <td>
+          <p><strong>{{result.userName}}</strong></p>
+          <p>Done in {{result.duration}}ms </p>
+          <p>Started at {{result.startTime | timestamp}}</p>
+          <div ng-show="result.exception || result.validation">
+            <p ng-show="result.exception">Exception: {{result.exception}}</p>
+            <p ng-show="result.validation">Validation: {{result.validation}}</p>
+          </div>
+          <p ng-show="result.response">
+            Response: {{result.response}}
+          </p>
+      </tr>
+      <tr ng-hide="filteredTopResults.length">
+        <td>No results</td>
+      </tr>
+    </table>
+  </div>
+</div>

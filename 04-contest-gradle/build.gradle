@@ -1,0 +1,31 @@
+
+plugins {
+  id "io.ratpack.ratpack-groovy" version "0.9.11"
+  id "idea"
+  id "eclipse"
+}
+
+version = '0.1'
+group = 'lv.latcraft.contest'
+
+repositories {
+  jcenter()
+  maven { url "http://oss.jfrog.org/artifactory/repo" }
+  maven { url "http://dl.bintray.com/kdabir/maven" }
+}
+
+configurations.all {
+  exclude module: "groovy"
+}
+
+dependencies {
+  compile "io.github.kdabir.gstorm:gstorm:0.7"
+  compile "io.ratpack:ratpack-jackson:0.9.11"
+  runtime "org.hsqldb:hsqldb:2.3.2" 
+  runtime "org.slf4j:slf4j-simple:1.7.7"
+  testCompile "junit:junit:4.12"
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.2'
+}

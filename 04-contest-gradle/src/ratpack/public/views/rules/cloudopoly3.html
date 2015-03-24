@@ -1,0 +1,81 @@
+<h1><strong>Cloudopoly #3</strong></h1>
+<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+  <a id="user-content-w00t-" class="anchor" href="#w00t-" aria-hidden="true"><span class="octicon octicon-link"></span></a>W00t? </h1>
+
+  <p>This repository contains description of the third Cloudopoly challenge. Cloudopoly is a set of challenges targeted towards raising awareness of AWS stack. Winners will get prizes from AWS! The first Cloudopoly will have 3 challenges, one per month. By getting 3 times in top 3 you will win a special prize from LatCraft.</p>
+
+  <p>Information about the first challenge can be found <a href="https://github.com/latcraft/cloudopoly-search">here</a>. Second challenge is described <a href="https://github.com/latcraft/cloudopoly-pics">here</a>.</p>
+
+  <h1>
+    <a id="user-content-problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem definition</h1>
+
+  <p>Create deployment service for Docker containers on top of AWS infrastructure. </p>
+
+  <p>The service must expose the following endpoints:</p>
+
+  <h3>
+    <a id="user-content-containers" class="anchor" href="#containers" aria-hidden="true"><span class="octicon octicon-link"></span></a>/containers</h3>
+
+  <p><code>POST</code> spins up new container in a region with fewest deployed containers. JSON body contains publicly accessible Docker image id  <code>{ "imageId": "&lt;imageId&gt;" }</code>. Image, when ran, starts web app that exposes <code>/ping</code> endpoint on port 8080.</p>
+
+  <p><code>GET</code> lists all deployed containers in the following format:</p>
+
+<pre><code>[
+  { "id": "&lt;containerId&gt;", "region": "&lt;region&gt;"  },
+  { "id": "&lt;containerId&gt;", "region": "&lt;region&gt;"  }
+  ...
+  ]
+</code></pre>
+
+  <p>... where <code>&lt;containerId&gt;</code> uniquely identifies container and <code>&lt;region&gt;</code> is, well, region (e.g. <code>us-east-1</code>).</p>
+
+  <h3>
+    <a id="user-content-containersregionregion" class="anchor" href="#containersregionregion" aria-hidden="true"><span class="octicon octicon-link"></span></a>/containers?region=&lt;region&gt;</h3>
+
+  <p><code>POST</code> spins up new container in a given <code>&lt;region&gt;</code>.</p>
+
+  <p><code>GET</code> lists deployed containers in a given <code>&lt;region&gt;</code>.</p>
+
+  <h3>
+    <a id="user-content-containerscontainerid" class="anchor" href="#containerscontainerid" aria-hidden="true"><span class="octicon octicon-link"></span></a>/containers/{containerId}</h3>
+
+  <p><code>DELETE</code> undeploys container by <code>&lt;containerId&gt;</code></p>
+
+  <h3>
+    <a id="user-content-regions" class="anchor" href="#regions" aria-hidden="true"><span class="octicon octicon-link"></span></a>/regions</h3>
+
+  <p><code>GET</code> lists all regions available for deployment in the following format:</p>
+
+<pre><code>[
+  { "region": "&lt;region&gt;" }
+  { "region": "&lt;region&gt;" }
+  ...
+  ]
+</code></pre>
+
+  <h3>
+    <a id="user-content-appcontainerid" class="anchor" href="#appcontainerid" aria-hidden="true"><span class="octicon octicon-link"></span></a>/app/{containerId}</h3>
+
+  <p><code>GET</code> forwards request to the web application deployed under <code>{containerId}</code>. That said, <code>/app/{containerId}/ping</code> must delegate to <code>/ping</code> mapped under port <code>8080</code>.</p>
+
+  <h1>
+    <a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+  <ul class="task-list">
+    <li>Any programming language, any operating system</li>
+    <li>Deploy your service to <em>AWS</em> <em>EC2</em> </li>
+    <li>Use whatever instances you want</li>
+    <li>Send IP address of your service before <code>02.03.2015 18:00</code> to <a href="mailto:contest@latcraft.lv">contest@latcraft.lv</a>
+    </li>
+    <li>On <code>02.03.2015 20:00</code> we start the test! </li>
+    <li>Keep EC2 instances running in at least 2 regions during testing time</li>
+  </ul>
+
+  <h1>
+    <a id="user-content-winner-election" class="anchor" href="#winner-election" aria-hidden="true"><span class="octicon octicon-link"></span></a>Winner election</h1>
+
+  <p>Winners will be selected randomly from the pool of attendees who implemented solution correctly.</p>
+
+  <h3>
+    <a id="user-content-good-luck" class="anchor" href="#good-luck" aria-hidden="true"><span class="octicon octicon-link"></span></a>Good luck!</h3>
+</article>
